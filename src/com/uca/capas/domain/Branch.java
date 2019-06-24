@@ -4,13 +4,18 @@ package com.uca.capas.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table (schema="public", name="branches")
 public class Branch {
 	@Id
+	@GeneratedValue(generator="branch_id_branch_seq",strategy=GenerationType.AUTO)
+	@SequenceGenerator(name="branch_id_branch_seq", sequenceName="public.branch_id_branch_seq", allocationSize = 1)
 	@Column (name = "branch_id")
 	private int branchId;
 	

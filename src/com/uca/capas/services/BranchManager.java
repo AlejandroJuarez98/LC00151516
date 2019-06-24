@@ -6,12 +6,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uca.capas.domain.Branch;
+import com.uca.capas.domain.Employee;
 import com.uca.capas.repositories.BranchRepositoryInterface;
+import com.uca.capas.repositories.EmployeeRepositoryInterface;
 
 @Service
 public class BranchManager {
 	@Autowired
 	private BranchRepositoryInterface branchRepositoryInterface;
+	
+	@Autowired
+	private EmployeeRepositoryInterface employeeRepositoryInterface;
+	
+	public List<Employee> getEmployees (int branchId) {
+		List<Employee> employees = null;
+		
+		try {
+			employees = this.employeeRepositoryInterface.getEmployees(branchId);
+		} catch(Exception error) {
+			error.printStackTrace();
+		}
+		
+		return employees;
+	}
 	
 	public List<Branch> getBranches () {
 		List<Branch> branches = null;

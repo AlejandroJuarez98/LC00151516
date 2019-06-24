@@ -68,11 +68,30 @@ public class MainController {
 		ModelAndView updateBranch = new ModelAndView();
 		updateBranch.addObject("username", username);
 		updateBranch.addObject("action", "update");
+		updateBranch.addObject("employees", this.bservice.getEmployees(branchId));
 		updateBranch.addObject("branch", this.bservice.getBranch(branchId));
 		
 		updateBranch.setViewName("form");
 		
 		return updateBranch;
+	}
+	
+	@RequestMapping(value="/new", method = RequestMethod.POST)
+	public ModelAndView newBranch (@RequestParam("id") int branchId, @RequestParam("location") String location, @RequestParam("openingTime") String openingTime, @RequestParam("closingTime") String closingTime, @RequestParam("tablesCount") int tables, final RedirectAttributes redirectAttributes) {
+		ModelAndView update = new ModelAndView();
+		
+		Branch branch = new Branch();
+		
+		branch.setBranchId(branchId);
+		branch.setLocation(location);
+		branch.setTablesCount(tables);
+		branch.setOpeningTime(openingTime);
+		branch.setClosingTime(closingTime);
+		
+		redirectAttributes.addFlashAttribute("success", this.bservice.saveBranch(branch, 1));
+		update.setViewName("redirect:/dashboard");
+		
+		return update;
 	}
 	
 	@RequestMapping(value="/update", method = RequestMethod.POST)

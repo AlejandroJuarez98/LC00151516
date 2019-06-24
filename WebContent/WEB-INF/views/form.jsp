@@ -17,11 +17,9 @@
  		text-align: center;
  		font-size: 14pt;
  		margin-top: 5%;
+ 		margin-bottom: 5%;
  	}
- 	
- 	.form-container {
- 		margin-top: 5%;;
- 	}
+ 
  </style>
 </head>
 <body>
@@ -72,7 +70,7 @@
 							<label class="form-label" for="tablesCount">Numero de mesas:</label>
 							<input class="form-control" type="number" name="tablesCount" value="${(branch != null) ? branch.getTablesCount() : 0}" autocomplete="off" required />
 						</div>
-						<input class="btn btn-outline-primary w-100" type="submit" value="Actualizar" />
+						<input class="btn btn-outline-primary w-100" type="submit" value='${action.equals("new") ? "Nueva sucursal" : "Actualizar sucursal"}' />
 			         </form>
 				</div>
 				<c:if test = '${action.equals("update")}'>
@@ -89,15 +87,37 @@
 							</div>
 							<div class="form-group">
 								<label class="form-label" for="gender">Género:</label>
-								<input class="form-control" type="text" name="gender" autocomplete="off" required />
+								<select class="form-control" name="gender">
+								  <option value="M">Masculino</option>
+								  <option value="F">Femenino</option>
+								</select>
 							</div>
 							<input class="btn btn-outline-info w-100" type="submit" value="Nuevo empleado" />
 				        </form>
 					</div>
 				</c:if>	
 			</div>
-			<c:if test = '${action.equals("update")}'>
-				
+			<c:if test = '${action.equals("update")}'><br>
+				<table class="table table-bordered">
+				  <thead>
+				    <tr>
+				      <th scope="col">Id</th>
+				      <th scope="col">Nombre</th>
+				      <th scope="col">Edad</th>
+				      <th scope="col">Género</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <c:forEach items="${ employees }" var="employee">
+				    	<tr>
+				    		<th>${ employee.getEmployeeId() }</th>
+				    		<th>${ employee.getName() }</th>
+				    		<th>${ employee.getAge() }</th>
+				    		<th>${ employee.getGender() }</th>
+				    	</tr>
+				    </c:forEach>
+				  </tbody>
+				</table>
 			</c:if>
 		</div>
 	</div>
