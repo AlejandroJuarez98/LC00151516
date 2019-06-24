@@ -4,13 +4,18 @@ package com.uca.capas.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table (schema="public", name="employees")
 public class Employee {
-	@Id
+	@Id 
+	@GeneratedValue(generator="employee_employee_id_seq",strategy=GenerationType.AUTO)
+	@SequenceGenerator(name="employee_employee_id_seq", sequenceName="public.employee_employee_id_seq", allocationSize = 1)
 	@Column (name = "employee_id")
 	private int employeeId;
 	

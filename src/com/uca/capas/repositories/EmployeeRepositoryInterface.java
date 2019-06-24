@@ -5,4 +5,5 @@ import com.uca.capas.domain.Employee;
 
 public interface EmployeeRepositoryInterface {
 	public List<Employee> getEmployees(int branchId);
+	public int saveEmployee(Employee employee);
 }

@@ -54,6 +54,18 @@ public class BranchManager {
 		return branch;
 	}
 	
+	public int saveEmployee (Employee e) {
+		int employee = 0;
+		
+		try {
+			employee =  this.employeeRepositoryInterface.saveEmployee(e);
+		} catch(Exception error) {
+			error.printStackTrace();
+		}
+		
+		return employee;
+	}
+	
 	public int saveBranch(Branch b, int newRow) {
 		int branch = 0;
 		

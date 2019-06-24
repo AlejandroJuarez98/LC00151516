@@ -93,6 +93,11 @@
 								</select>
 							</div>
 							<input class="btn btn-outline-info w-100" type="submit" value="Nuevo empleado" />
+							<c:if test = "${success == 0}">
+								<div class="alert alert-success log" role="alert">
+								   <p class="log">¡Operación exitosa!</p>
+								</div>
+							</c:if>	
 				        </form>
 					</div>
 				</c:if>	

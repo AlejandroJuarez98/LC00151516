@@ -5,7 +5,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
+
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+
+import com.uca.capas.domain.Branch;
 import com.uca.capas.domain.Employee;
 
 @Repository
@@ -26,5 +31,16 @@ public class EmployeeRepository implements EmployeeRepositoryInterface {
 		
 		return result;
 	}
-
+	
+	@Transactional
+	@Override
+	public int saveEmployee(Employee employee) throws DataAccessException {
+		try {
+			this.emanager.persist(employee);
+			return 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
 }

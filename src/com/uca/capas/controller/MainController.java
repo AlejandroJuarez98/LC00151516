@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.uca.capas.domain.Branch;
+import com.uca.capas.domain.Employee;
 import com.uca.capas.services.BranchManager;
 import com.uca.capas.services.UserManager;
 
@@ -52,6 +53,22 @@ public class MainController {
 		}
 		
 		return dashboard;
+	}
+	
+	@RequestMapping(value="/add-employee", method = RequestMethod.POST)
+	public ModelAndView addEmployee(@RequestParam("branchId") int branchId, @RequestParam("name") String name, @RequestParam("age") int age, @RequestParam("gender") char gender, final RedirectAttributes redirectAttributes) {
+		ModelAndView addEmployee = new ModelAndView();
+		Employee employee = new Employee();
+		
+		employee.setBranchId(branchId);
+		employee.setName(name);
+		employee.setAge(age);
+		employee.setGender(gender);
+		
+		redirectAttributes.addFlashAttribute("success", this.bservice.saveEmployee(employee));
+		addEmployee.setViewName("redirect:/update-branch?id=" + branchId);
+		
+		return addEmployee;
 	}
 	
 	@RequestMapping(value="/new-branch", method = RequestMethod.GET)
